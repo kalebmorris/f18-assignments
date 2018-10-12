@@ -1,0 +1,46 @@
+### Starting build.
+# Target: exercise3.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), bin_annot, debug, extension:ml, file:exercise3.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules exercise3.ml > exercise3.ml.depends
+# Target: exercise3.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:exercise3.cmo, file:exercise3.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -o exercise3.cmo exercise3.ml
++ ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -o exercise3.cmo exercise3.ml
+File "exercise3.ml", line 53, characters 14-30:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+((Int _, (Bool _|Binop (_, _, _)|Iszero _|If (_, _, _)))|
+((Bool _|Binop (_, _, _)|Iszero _|If (_, _, _)), _))
+File "exercise3.ml", line 61, characters 11-16:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Bool _|Binop (_, _, _)|Iszero _|If (_, _, _))
+File "exercise3.ml", line 67, characters 11-17:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Int _|Binop (_, _, _)|Iszero _|If (_, _, _))
+File "exercise3.ml", line 20, characters 8-9:
+Warning 27: unused variable n.
+File "exercise3.ml", line 21, characters 9-10:
+Warning 27: unused variable n.
+# Target: exercise3.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), bin_annot, compile, debug, extension:cmx, extension:ml, file:exercise3.cmx, file:exercise3.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -o exercise3.cmx exercise3.ml
++ ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -o exercise3.cmx exercise3.ml
+File "exercise3.ml", line 53, characters 14-30:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+((Int _, (Bool _|Binop (_, _, _)|Iszero _|If (_, _, _)))|
+((Bool _|Binop (_, _, _)|Iszero _|If (_, _, _)), _))
+File "exercise3.ml", line 61, characters 11-16:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Bool _|Binop (_, _, _)|Iszero _|If (_, _, _))
+File "exercise3.ml", line 67, characters 11-17:
+Warning 8: this pattern-matching is not exhaustive.
+Here is an example of a case that is not matched:
+(Int _|Binop (_, _, _)|Iszero _|If (_, _, _))
+File "exercise3.ml", line 20, characters 8-9:
+Warning 27: unused variable n.
+File "exercise3.ml", line 21, characters 9-10:
+Warning 27: unused variable n.
+# Target: exercise3.native, tags: { package(core), ppx(ppx-jane -as-ppx), bin_annot, debug, dont_link_with, extension:native, file:exercise3.native, link, native, ocaml, program, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -linkpkg -g -thread -package core exercise3.cmx -o exercise3.native
+# Compilation successful.

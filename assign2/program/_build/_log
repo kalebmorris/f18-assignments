@@ -1,0 +1,57 @@
+### Starting build.
+# Target: src/main.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/main.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/main.ml > src/main.ml.depends # cached
+# Target: src/ast.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/ast.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/ast.mli > src/ast.mli.depends # cached
+# Target: src/ast.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/ast.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/ast.cmi src/ast.mli # cached
+# Target: src/interpreter.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/interpreter.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/interpreter.mli > src/interpreter.mli.depends # cached
+# Target: src/interpreter.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/interpreter.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/interpreter.cmi src/interpreter.mli # cached
+# Target: src/lexer.mll, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mll, file:src/lexer.mll, lexer, ocaml, ocamllex, quiet, short_paths, thread, traverse }
+/Users/kalebmorris/.opam/4.06.1/bin/ocamllex.opt -q src/lexer.mll # cached
+# Target: src/lexer.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/lexer.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/lexer.ml > src/lexer.ml.depends # cached
+# Target: src/parser.mly.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mly, file:src/parser.mly, infer, menhir_ocamldep, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+menhir --raw-depend --ocamldep 'ocamlfind ocamldep -modules' src/parser.mly > src/parser.mly.depends # cached
+# Target: src/parser.mly, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:ml, extension:mly, file:src/parser.ml, file:src/parser.mly, infer, menhir, ocaml, parser, quiet, short_paths, thread, traverse }
+menhir --ocamlc 'ocamlfind ocamlc -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx '\''ppx-jane -as-ppx'\'' -I src' --infer src/parser.mly # cached
+# Target: src/parser.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/parser.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/parser.mli > src/parser.mli.depends # cached
+# Target: src/parser.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/parser.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/parser.cmi src/parser.mli # cached
+# Target: src/lexer.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:src/lexer.cmo, file:src/lexer.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/lexer.cmo src/lexer.ml # cached
+# Target: src/typecheck.mli.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:mli, file:src/typecheck.mli, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/typecheck.mli > src/typecheck.mli.depends # cached
+# Target: src/typecheck.cmi, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:mli, file:src/typecheck.mli, interf, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/typecheck.cmi src/typecheck.mli # cached
+# Target: src/main.cmo, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, byte, compile, debug, extension:cmo, extension:ml, file:src/main.cmo, file:src/main.ml, implem, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlc -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/main.cmo src/main.ml # cached
+# Target: src/ast.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/ast.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/ast.ml > src/ast.ml.depends # cached
+# Target: src/ast.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/ast.cmx, file:src/ast.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/ast.cmx src/ast.ml # cached
+# Target: src/interpreter.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/interpreter.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/interpreter.ml > src/interpreter.ml.depends # cached
+# Target: src/interpreter.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/interpreter.cmx, file:src/interpreter.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/interpreter.cmx src/interpreter.ml # cached
+# Target: src/parser.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/parser.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/parser.ml > src/parser.ml.depends # cached
+# Target: src/parser.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/parser.cmx, file:src/parser.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/parser.cmx src/parser.ml # cached
+# Target: src/lexer.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/lexer.cmx, file:src/lexer.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/lexer.cmx src/lexer.ml # cached
+# Target: src/typecheck.ml.depends, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, extension:ml, file:src/typecheck.ml, ocaml, ocamldep, quiet, short_paths, thread, traverse }
+ocamlfind ocamldep -package core -ppx 'ppx-jane -as-ppx' -modules src/typecheck.ml > src/typecheck.ml.depends
+# Target: src/typecheck.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/typecheck.cmx, file:src/typecheck.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/typecheck.cmx src/typecheck.ml
++ ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/typecheck.cmx src/typecheck.ml
+File "src/typecheck.ml", line 5, characters 0-23:
+Warning 38: unused exception Unimplemented
+# Target: src/main.cmx, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, compile, debug, extension:cmx, extension:ml, file:src/main.cmx, file:src/main.ml, implem, native, ocaml, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -c -w A-4-33-40-41-42-43-34-44 -strict-sequence -g -annot -bin-annot -short-paths -thread -package core -ppx 'ppx-jane -as-ppx' -I src -o src/main.cmx src/main.ml
+# Target: src/main.native, tags: { package(core), ppx(ppx-jane -as-ppx), annot, bin_annot, debug, dont_link_with, extension:native, file:src/main.native, link, native, ocaml, program, quiet, short_paths, thread, traverse }
+ocamlfind ocamlopt -linkpkg -g -thread -package core -I src src/ast.cmx src/interpreter.cmx src/parser.cmx src/lexer.cmx src/typecheck.cmx src/main.cmx -o src/main.native
+# Compilation successful.

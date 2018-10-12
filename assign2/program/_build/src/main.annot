@@ -1,0 +1,721 @@
+"src/main.ml" 5 44 48 "src/main.ml" 5 44 53
+type(
+  string -> (Expr.t, string) result
+)
+ident(
+  def parse "src/main.ml" 12 290 290 "src/main.ml" 1 0 -1
+)
+"src/main.ml" 5 44 54 "src/main.ml" 5 44 59
+type(
+  string
+)
+ident(
+  def input "src/main.ml" 6 62 64 "src/main.ml" 10 217 288
+)
+"src/main.ml" 6 62 68 "src/main.ml" 6 62 75
+type(
+  Lexing.lexbuf
+)
+ident(
+  def filebuf "src/main.ml" 7 106 108 "src/main.ml" 10 217 288
+)
+"src/main.ml" 6 62 78 "src/main.ml" 6 62 96
+type(
+  string -> Lexing.lexbuf
+)
+ident(
+  int_ref Lexing.from_string "lexing.mli" 83 3481 3481 "lexing.mli" 83 3481 3515
+)
+"src/main.ml" 6 62 97 "src/main.ml" 6 62 102
+type(
+  string
+)
+ident(
+  int_ref input "src/main.ml" 5 44 54 "src/main.ml" 5 44 59
+)
+"src/main.ml" 6 62 78 "src/main.ml" 6 62 102
+call(
+  stack
+)
+type(
+  Lexing.lexbuf
+)
+"src/main.ml" 7 106 117 "src/main.ml" 7 106 128
+type(
+  (Lexing.lexbuf -> Parser.token) -> Lexing.lexbuf -> Expr.t
+)
+ident(
+  int_ref Parser.main "src/parser.mli" 37 407 407 "src/parser.mli" 37 407 474
+)
+"src/main.ml" 7 106 129 "src/main.ml" 7 106 140
+type(
+  Lexing.lexbuf -> Parser.token
+)
+ident(
+  int_ref Lexer.token "src/lexer.ml" 400 26380 26388 "src/lexer.ml" 400 26380 26393
+)
+"src/main.ml" 7 106 141 "src/main.ml" 7 106 148
+type(
+  Lexing.lexbuf
+)
+ident(
+  int_ref filebuf "src/main.ml" 6 62 68 "src/main.ml" 6 62 75
+)
+"src/main.ml" 7 106 116 "src/main.ml" 7 106 149
+call(
+  stack
+)
+type(
+  Expr.t
+)
+"src/main.ml" 7 106 112 "src/main.ml" 7 106 150
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 8 156 172 "src/main.ml" 8 156 175
+type(
+  string
+)
+ident(
+  def msg "src/main.ml" 8 156 179 "src/main.ml" 8 156 188
+)
+"src/main.ml" 8 156 160 "src/main.ml" 8 156 175
+type(
+  exn
+)
+"src/main.ml" 8 156 185 "src/main.ml" 8 156 188
+type(
+  string
+)
+ident(
+  int_ref msg "src/main.ml" 8 156 172 "src/main.ml" 8 156 175
+)
+"src/main.ml" 8 156 179 "src/main.ml" 8 156 188
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 9 189 193 "src/main.ml" 9 189 205
+type(
+  exn
+)
+"src/main.ml" 10 217 221 "src/main.ml" 10 217 235
+type(
+  (int -> string, unit, string) Base.format -> int -> string
+)
+ident(
+  int_ref Core.Printf.sprintf "src/printf.mli" 7 128 128 "src/printf.mli" 7 128 199
+)
+"src/main.ml" 10 217 236 "src/main.ml" 10 217 257
+type(
+  (int -> string, unit, string) Base.format
+)
+"src/main.ml" 10 217 259 "src/main.ml" 10 217 278
+type(
+  Lexing.lexbuf -> int
+)
+ident(
+  int_ref Lexing.lexeme_start "lexing.mli" 118 4931 4931 "lexing.mli" 118 4931 4963
+)
+"src/main.ml" 10 217 279 "src/main.ml" 10 217 286
+type(
+  Lexing.lexbuf
+)
+ident(
+  int_ref filebuf "src/main.ml" 6 62 68 "src/main.ml" 6 62 75
+)
+"src/main.ml" 10 217 258 "src/main.ml" 10 217 287
+call(
+  stack
+)
+type(
+  int
+)
+"src/main.ml" 9 189 215 "src/main.ml" 10 217 288
+call(
+  stack
+)
+type(
+  string
+)
+"src/main.ml" 9 189 209 "src/main.ml" 10 217 288
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 7 106 108 "src/main.ml" 10 217 288
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 6 62 64 "src/main.ml" 10 217 288
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 12 290 294 "src/main.ml" 12 290 303
+type(
+  Expr.t -> (Expr.t, string) result
+)
+ident(
+  def interpret "src/main.ml" 18 479 479 "src/main.ml" 1 0 -1
+)
+"src/main.ml" 12 290 304 "src/main.ml" 12 290 308
+type(
+  Expr.t
+)
+ident(
+  def expr "src/main.ml" 13 311 313 "src/main.ml" 16 454 477
+)
+"src/main.ml" 13 311 313 "src/main.ml" 13 311 326
+type(
+  (string -> unit, Out_channel.t, unit) Base.format -> string -> unit
+)
+ident(
+  int_ref Core.Printf.printf "src/printf.ml" 10 231 235 "src/printf.ml" 10 231 241
+)
+"src/main.ml" 13 311 327 "src/main.ml" 13 311 339
+type(
+  (string -> unit, Out_channel.t, unit) Base.format
+)
+"src/main.ml" 13 311 341 "src/main.ml" 13 311 355
+type(
+  Expr.t -> string
+)
+ident(
+  int_ref Ast.Expr.to_string "src/ast.mli" 33 653 655 "src/ast.mli" 33 653 682
+)
+"src/main.ml" 13 311 356 "src/main.ml" 13 311 360
+type(
+  Expr.t
+)
+ident(
+  int_ref expr "src/main.ml" 12 290 304 "src/main.ml" 12 290 308
+)
+"src/main.ml" 13 311 340 "src/main.ml" 13 311 361
+call(
+  stack
+)
+type(
+  string
+)
+"src/main.ml" 13 311 313 "src/main.ml" 13 311 361
+call(
+  stack
+)
+type(
+  unit
+)
+"src/main.ml" 14 363 365 "src/main.ml" 14 363 384
+type(
+  Expr.t -> (Type.t, string) result
+)
+ident(
+  int_ref Typecheck.typecheck "src/typecheck.mli" 5 94 94 "src/typecheck.mli" 5 94 145
+)
+"src/main.ml" 14 363 385 "src/main.ml" 14 363 389
+type(
+  Expr.t
+)
+ident(
+  int_ref expr "src/main.ml" 12 290 304 "src/main.ml" 12 290 308
+)
+"src/main.ml" 14 363 365 "src/main.ml" 14 363 389
+call(
+  stack
+)
+type(
+  (Type.t, string) result
+)
+"src/main.ml" 14 363 390 "src/main.ml" 14 363 393
+type(
+  (Type.t, string) result ->
+  (Type.t -> (Expr.t, string) result) -> (Expr.t, string) result
+)
+ident(
+  int_ref Core.Result.Monad_infix.( >>= ) "src/monad_intf.ml" 113 3650 3652 "src/monad_intf.ml" 113 3650 3710
+)
+"src/main.ml" 14 363 398 "src/main.ml" 14 363 400
+type(
+  Type.t
+)
+ident(
+  def ty "src/main.ml" 15 404 406 "src/main.ml" 16 454 477
+)
+"src/main.ml" 15 404 406 "src/main.ml" 15 404 419
+type(
+  (string -> unit, Out_channel.t, unit) Base.format -> string -> unit
+)
+ident(
+  int_ref Core.Printf.printf "src/printf.ml" 10 231 235 "src/printf.ml" 10 231 241
+)
+"src/main.ml" 15 404 420 "src/main.ml" 15 404 432
+type(
+  (string -> unit, Out_channel.t, unit) Base.format
+)
+"src/main.ml" 15 404 434 "src/main.ml" 15 404 448
+type(
+  Type.t -> string
+)
+ident(
+  int_ref Ast.Type.to_string "src/ast.mli" 11 149 151 "src/ast.mli" 11 149 178
+)
+"src/main.ml" 15 404 449 "src/main.ml" 15 404 451
+type(
+  Type.t
+)
+ident(
+  int_ref ty "src/main.ml" 14 363 398 "src/main.ml" 14 363 400
+)
+"src/main.ml" 15 404 433 "src/main.ml" 15 404 452
+call(
+  stack
+)
+type(
+  string
+)
+"src/main.ml" 15 404 406 "src/main.ml" 15 404 452
+call(
+  stack
+)
+type(
+  unit
+)
+"src/main.ml" 16 454 456 "src/main.ml" 16 454 472
+type(
+  Expr.t -> (Expr.t, string) result
+)
+ident(
+  int_ref Interpreter.eval "src/interpreter.mli" 12 208 208 "src/interpreter.mli" 12 208 254
+)
+"src/main.ml" 16 454 473 "src/main.ml" 16 454 477
+type(
+  Expr.t
+)
+ident(
+  int_ref expr "src/main.ml" 12 290 304 "src/main.ml" 12 290 308
+)
+"src/main.ml" 16 454 456 "src/main.ml" 16 454 477
+call(
+  tail
+)
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 15 404 406 "src/main.ml" 16 454 477
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 14 363 394 "src/main.ml" 16 454 477
+type(
+  Type.t -> (Expr.t, string) result
+)
+"src/main.ml" 14 363 365 "src/main.ml" 16 454 477
+call(
+  tail
+)
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 13 311 313 "src/main.ml" 16 454 477
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 18 479 483 "src/main.ml" 18 479 486
+type(
+  string option -> unit
+)
+ident(
+  def run "src/main.ml" 28 786 786 "src/main.ml" 1 0 -1
+)
+"src/main.ml" 18 479 487 "src/main.ml" 18 479 494
+type(
+  string option
+)
+ident(
+  def fileopt "src/main.ml" 19 497 499 "src/main.ml" 26 770 784
+)
+"src/main.ml" 19 497 505 "src/main.ml" 19 497 512
+type(
+  string option
+)
+ident(
+  int_ref fileopt "src/main.ml" 18 479 487 "src/main.ml" 18 479 494
+)
+"src/main.ml" 20 518 528 "src/main.ml" 20 518 536
+ident(
+  def filename "src/main.ml" 20 518 541 "src/main.ml" 25 722 769
+)
+"src/main.ml" 20 518 527 "src/main.ml" 20 518 537
+type(
+  string
+)
+"src/main.ml" 20 518 522 "src/main.ml" 20 518 537
+type(
+  string option
+)
+"src/main.ml" 21 543 551 "src/main.ml" 21 543 556
+type(
+  string
+)
+ident(
+  def input "src/main.ml" 22 591 595 "src/main.ml" 25 722 768
+)
+"src/main.ml" 21 543 559 "src/main.ml" 21 543 578
+type(
+  string -> string
+)
+ident(
+  int_ref Core.In_channel.read_all "src/in_channel.mli" 111 4170 4170 "src/in_channel.mli" 111 4170 4203
+)
+"src/main.ml" 21 543 579 "src/main.ml" 21 543 587
+type(
+  string
+)
+ident(
+  int_ref filename "src/main.ml" 20 518 527 "src/main.ml" 20 518 537
+)
+"src/main.ml" 21 543 559 "src/main.ml" 21 543 587
+call(
+  stack
+)
+type(
+  string
+)
+"src/main.ml" 22 591 599 "src/main.ml" 22 591 605
+type(
+  (Expr.t, string) result
+)
+ident(
+  def result "src/main.ml" 23 637 641 "src/main.ml" 25 722 768
+)
+"src/main.ml" 22 591 608 "src/main.ml" 22 591 613
+type(
+  string -> (Expr.t, string) result
+)
+ident(
+  int_ref parse "src/main.ml" 5 44 48 "src/main.ml" 5 44 53
+)
+"src/main.ml" 22 591 614 "src/main.ml" 22 591 619
+type(
+  string
+)
+ident(
+  int_ref input "src/main.ml" 21 543 551 "src/main.ml" 21 543 556
+)
+"src/main.ml" 22 591 608 "src/main.ml" 22 591 619
+call(
+  stack
+)
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 22 591 620 "src/main.ml" 22 591 623
+type(
+  (Expr.t, string) result ->
+  (Expr.t -> (Expr.t, string) result) -> (Expr.t, string) result
+)
+ident(
+  int_ref Core.Result.Monad_infix.( >>= ) "src/monad_intf.ml" 113 3650 3652 "src/monad_intf.ml" 113 3650 3710
+)
+"src/main.ml" 22 591 624 "src/main.ml" 22 591 633
+type(
+  Expr.t -> (Expr.t, string) result
+)
+ident(
+  int_ref interpret "src/main.ml" 12 290 294 "src/main.ml" 12 290 303
+)
+"src/main.ml" 22 591 608 "src/main.ml" 22 591 633
+call(
+  stack
+)
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 23 637 647 "src/main.ml" 23 637 653
+type(
+  (Expr.t, string) result
+)
+ident(
+  int_ref result "src/main.ml" 22 591 599 "src/main.ml" 22 591 605
+)
+"src/main.ml" 24 659 668 "src/main.ml" 24 659 669
+type(
+  Expr.t
+)
+ident(
+  def e "src/main.ml" 24 659 673 "src/main.ml" 24 659 721
+)
+"src/main.ml" 24 659 665 "src/main.ml" 24 659 669
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 24 659 673 "src/main.ml" 24 659 686
+type(
+  (string -> unit, Out_channel.t, unit) Base.format -> string -> unit
+)
+ident(
+  int_ref Core.Printf.printf "src/printf.ml" 10 231 235 "src/printf.ml" 10 231 241
+)
+"src/main.ml" 24 659 687 "src/main.ml" 24 659 702
+type(
+  (string -> unit, Out_channel.t, unit) Base.format
+)
+"src/main.ml" 24 659 704 "src/main.ml" 24 659 718
+type(
+  Expr.t -> string
+)
+ident(
+  int_ref Ast.Expr.to_string "src/ast.mli" 33 653 655 "src/ast.mli" 33 653 682
+)
+"src/main.ml" 24 659 719 "src/main.ml" 24 659 720
+type(
+  Expr.t
+)
+ident(
+  int_ref e "src/main.ml" 24 659 668 "src/main.ml" 24 659 669
+)
+"src/main.ml" 24 659 703 "src/main.ml" 24 659 721
+call(
+  stack
+)
+type(
+  string
+)
+"src/main.ml" 24 659 673 "src/main.ml" 24 659 721
+call(
+  tail
+)
+type(
+  unit
+)
+"src/main.ml" 25 722 734 "src/main.ml" 25 722 735
+type(
+  string
+)
+ident(
+  def s "src/main.ml" 25 722 739 "src/main.ml" 25 722 768
+)
+"src/main.ml" 25 722 728 "src/main.ml" 25 722 735
+type(
+  (Expr.t, string) result
+)
+"src/main.ml" 25 722 739 "src/main.ml" 25 722 752
+type(
+  (string -> unit, Out_channel.t, unit) Base.format -> string -> unit
+)
+ident(
+  int_ref Core.Printf.printf "src/printf.ml" 10 231 235 "src/printf.ml" 10 231 241
+)
+"src/main.ml" 25 722 753 "src/main.ml" 25 722 766
+type(
+  (string -> unit, Out_channel.t, unit) Base.format
+)
+"src/main.ml" 25 722 767 "src/main.ml" 25 722 768
+type(
+  string
+)
+ident(
+  int_ref s "src/main.ml" 25 722 734 "src/main.ml" 25 722 735
+)
+"src/main.ml" 25 722 739 "src/main.ml" 25 722 768
+call(
+  tail
+)
+type(
+  unit
+)
+"src/main.ml" 23 637 641 "src/main.ml" 25 722 768
+type(
+  unit
+)
+"src/main.ml" 22 591 595 "src/main.ml" 25 722 768
+type(
+  unit
+)
+"src/main.ml" 20 518 541 "src/main.ml" 25 722 769
+type(
+  unit
+)
+"src/main.ml" 26 770 774 "src/main.ml" 26 770 778
+type(
+  string option
+)
+"src/main.ml" 26 770 782 "src/main.ml" 26 770 784
+type(
+  unit
+)
+"src/main.ml" 19 497 499 "src/main.ml" 26 770 784
+type(
+  unit
+)
+"src/main.ml" 28 786 790 "src/main.ml" 28 786 794
+type(
+  unit -> unit
+)
+ident(
+  def main "src/main.ml" 38 1009 1009 "src/main.ml" 1 0 -1
+)
+"src/main.ml" 28 786 795 "src/main.ml" 28 786 797
+type(
+  unit
+)
+"src/main.ml" 30 833 835 "src/main.ml" 30 833 848
+type(
+  unit Command.basic_command
+)
+ident(
+  int_ref Core.Command.basic "src/command.mli" 624 23114 23114 "src/command.mli" 624 23114 23144
+)
+"src/main.ml" 31 849 862 "src/main.ml" 31 849 880
+type(
+  string
+)
+"src/main.ml" 33 896 906 "src/main.ml" 33 896 914
+type(
+  string option
+)
+ident(
+  def filename "src/main.ml" 34 956 962 "src/main.ml" 34 956 984
+)
+"src/main.ml" 33 896 917 "src/main.ml" 33 896 921
+type(
+  string option Command.Spec.anons -> string option t
+)
+ident(
+  int_ref Core.Command.Let_syntax.Let_syntax.Open_on_rhs.anon "src/command.mli" 341 12688 12692 "src/command.mli" 341 12688 12721
+)
+"src/main.ml" 33 896 923 "src/main.ml" 33 896 928
+type(
+  string Command.Spec.anons -> string option Command.Spec.anons
+)
+ident(
+  int_ref Core.Command.Let_syntax.Let_syntax.Open_on_rhs.maybe "src/command.mli" 195 7762 7764 "src/command.mli" 195 7762 7795
+)
+"src/main.ml" 33 896 930 "src/main.ml" 33 896 940
+type(
+  string
+)
+"src/main.ml" 33 896 941 "src/main.ml" 33 896 943
+type(
+  string -> string Arg_type.t -> string Command.Spec.anons
+)
+ident(
+  int_ref Core.Command.Let_syntax.Let_syntax.Open_on_rhs.( %: ) "src/command.mli" 181 7076 7078 "src/command.mli" 181 7076 7122
+)
+"src/main.ml" 33 896 944 "src/main.ml" 33 896 950
+type(
+  string Arg_type.t
+)
+ident(
+  int_ref Core.Command.Let_syntax.Let_syntax.Open_on_rhs.string "src/command.mli" 86 3291 3295 "src/command.mli" 86 3291 3340
+)
+"src/main.ml" 33 896 929 "src/main.ml" 33 896 951
+call(
+  stack
+)
+type(
+  string Command.Spec.anons
+)
+"src/main.ml" 33 896 922 "src/main.ml" 33 896 952
+call(
+  stack
+)
+type(
+  string option Command.Spec.anons
+)
+"src/main.ml" 33 896 917 "src/main.ml" 33 896 952
+call(
+  stack
+)
+type(
+  string option t
+)
+"src/main.ml" 34 956 966 "src/main.ml" 34 956 968
+type(
+  unit
+)
+"src/main.ml" 34 956 972 "src/main.ml" 34 956 975
+type(
+  string option -> unit
+)
+ident(
+  int_ref run "src/main.ml" 18 479 483 "src/main.ml" 18 479 486
+)
+"src/main.ml" 34 956 976 "src/main.ml" 34 956 984
+type(
+  string option
+)
+ident(
+  int_ref filename "src/main.ml" 33 896 906 "src/main.ml" 33 896 914
+)
+"src/main.ml" 34 956 972 "src/main.ml" 34 956 984
+call(
+  tail
+)
+type(
+  unit
+)
+"src/main.ml" 34 956 962 "src/main.ml" 34 956 984
+type(
+  unit -> unit
+)
+"src/main.ml" 33 896 902 "src/main.ml" 34 956 984
+call(
+  stack
+)
+type(
+  (unit -> unit) Command.Spec.param
+)
+type(
+  string option -> unit -> unit
+)
+type(
+  string option Command.Spec.param ->
+  f:(string option -> unit -> unit) -> (unit -> unit) Command.Spec.param
+)
+ident(
+  int_ref Core.Command.Let_syntax.Let_syntax.map "src/command.mli" 373 13661 13665 "src/command.mli" 373 13661 13706
+)
+"src/main.ml" 30 833 835 "src/main.ml" 35 985 990
+call(
+  stack
+)
+type(
+  Command.t
+)
+"src/main.ml" 36 991 996 "src/main.ml" 36 991 1007
+type(
+  ?version:string ->
+  ?build_info:string ->
+  ?argv:string list ->
+  ?extend:(string list -> string list) -> Command.t -> unit
+)
+ident(
+  int_ref Core.Command.run "src/command.mli" 801 29165 29165 "src/command.mli" 807 29311 29320
+)
+"src/main.ml" 30 833 835 "src/main.ml" 36 991 1007
+call(
+  tail
+)
+type(
+  unit
+)
+"src/main.ml" 38 1009 1013 "src/main.ml" 38 1009 1015
+type(
+  unit
+)
+"src/main.ml" 38 1009 1018 "src/main.ml" 38 1009 1022
+type(
+  unit -> unit
+)
+ident(
+  int_ref main "src/main.ml" 28 786 790 "src/main.ml" 28 786 794
+)
+"src/main.ml" 38 1009 1023 "src/main.ml" 38 1009 1025
+type(
+  unit
+)
+"src/main.ml" 38 1009 1018 "src/main.ml" 38 1009 1025
+call(
+  stack
+)
+type(
+  unit
+)

@@ -40,15 +40,26 @@ module Expr = struct
    * implementation. *)
   let rec substitute (x : string) (e' : t) (e : t) : t =
     match e with
-    | Int n -> raise Unimplemented
-    | Var x' -> raise Unimplemented
-    | Binop (b, t1, t2) -> raise Unimplemented
-    | Lam (x', tau, body) -> raise Unimplemented
-    | App (t1, t2) -> raise Unimplemented
-    | Pair (e1, e2) -> raise Unimplemented
-    | Project (e, d) -> raise Unimplemented
-    | Inject (e, d, tau) -> raise Unimplemented
-    | Case (e, (x1, e1), (x2, e2)) -> raise Unimplemented
+    | Int n -> 
+        Int(n)
+    | Var x' -> 
+        if x' = x then e' else Var(x')
+    | Binop (b, t1, t2) -> 
+        Binop(b, substitute x e' t1, substitute x e' t2)
+    | Lam (x', tau, body) -> 
+        if x' = x then Lam(x', tau, body) else Lam(x', tau, substitute x e' body)
+    | App (t1, t2) -> 
+        App(substitute x e' t1, substitute x e' t2)
+    | Pair (e1, e2) -> 
+        Pair(substitute x e' e1, substitute x e' e2)
+    | Project (e, d) -> 
+        Project(substitute x e' e, d)
+    | Inject (e, d, tau) -> 
+        Inject(substitute x e' e, d, tau)
+    | Case (e, (x1, e1), (x2, e2)) ->
+        let f1 = (if x1 = x then e1 else substitute x e' e1) in
+        let f2 = (if x2 = x then e2 else substitute x e' e2) in
+          Case(substitute x e' e, (x1, f1), (x2, f2))
 
   let inline_tests () =
     let t1 = App(Lam("x", Type.Int, Var "x"), Var "y") in
@@ -63,7 +74,7 @@ module Expr = struct
             Binop(Add, Var "x", Lam("x", Type.Int, Int 0)))
 
   (* Uncomment the line below when you want to run the inline tests. *)
-  (* let () = inline_tests () *)
+  let () = inline_tests ()
 
 
   let to_string e = Sexp.to_string_hum (sexp_of_t e)

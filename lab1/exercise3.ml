@@ -20,11 +20,15 @@ let rec typecheck (e : expr) : typ option =
   | Int n -> Some(IntT)
   | Bool n -> Some(BoolT)
   | Binop (_, e1, e2) ->
-    raise Unimplemented
+    if (typecheck e1 = Some(IntT) && typecheck e2 = Some(IntT)) then Some(IntT)
+    else None
   | Iszero e ->
-    raise Unimplemented
+    if (typecheck e = Some(IntT)) then Some(BoolT)
+    else None
   | If (e1, e2, e3) ->
-    raise Unimplemented
+    let x = typecheck e2 in
+      if (typecheck e1 = Some(BoolT) && typecheck e3 = x) then x
+      else None
 ;;
 
 assert (typecheck (Int 0) = Some IntT);
@@ -51,9 +55,18 @@ let rec trystep (e : expr) : result =
             | Add -> n1 + n2
             | Sub -> n1 - n2))))
   | Iszero e ->
-    raise Unimplemented
+    (match trystep e with
+     | Step e' -> Step(Iszero(e'))
+     | Val ->
+       let Int n = e in
+         Step(Bool(n = 0)))
   | If (e1, e2, e3) ->
-    raise Unimplemented
+    (match trystep e1 with
+     | Step e1' -> Step(If(e1',e2,e3))
+     | Val ->
+       let Bool b = e1 in
+         if b then Step(e2)
+         else Step(e3))
 
 let rec eval (e : expr) : expr =
   match trystep e with

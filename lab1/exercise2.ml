@@ -19,13 +19,26 @@ module IntTreeImpl : IntTree = struct
     | Node (l, _, r) -> 1 + (size l) + (size r)
 
   let rec map (f : int -> int) (t : tree) =
-    raise Unimplemented
+    match t with
+    | Leaf -> Leaf
+    | Node (l, n, r) -> Node(map f l, f n, map f r)
 
   let rec to_string (t : tree) : string =
-    raise Unimplemented
+    match t with
+    | Leaf -> "()"
+    | Node (l, x, r) ->
+        Printf.sprintf "(%s, %d, %s)"
+        (to_string l) x (to_string r)
 
   let rec binary_search (t : tree) (n : int) : int option =
-    raise Unimplemented
+    match t with
+    | Leaf -> None
+    | Node (l, x, r) ->
+        if x > n then binary_search l n
+        else if x = n then Some n
+        else match r with
+             | Leaf -> Some x
+             | Node (_, _, _) -> binary_search r n
 end
 
 module IntTreeTests(T : IntTree) = struct
