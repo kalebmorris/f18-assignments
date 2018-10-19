@@ -18,23 +18,42 @@ module MyList : List2 = struct
 
   let rec foldr f base l =
     match l with
-    | Cons(x, Nil) -> f base x
-    | Cons(x, y) -> foldr f base y
+    | Nil -> base
+    | Cons(x, l') -> f x (foldr f base l')
 
   let to_string f l =
-    raise Unimplemented
+    foldr (fun x y -> (f x) ^ " " ^ y) "" l
 
   let map f l =
-    raise Unimplemented
+    foldr (fun x l' -> Cons(f x, l')) Nil l
 
   let rec filter f l =
-    raise Unimplemented
+    foldr (fun x l' -> if f x then Cons(x, l') else l') Nil l
 
   let reduce f l =
-    raise Unimplemented
+    match l with
+    | Cons(x, l') -> Some (foldr (fun y z -> f y z) x l')
+    | Nil -> None
 
   let combine_keys l =
-    raise Unimplemented
+    foldr 
+        (fun pair l' -> 
+            match pair with
+            | (key, value) -> 
+                if (foldr 
+                    (fun pair' b -> 
+                        match pair' with
+                        | (k, _) -> 
+                            if (k = key) then (true || b) else false) 
+                    false l')
+                        then map 
+                            (fun key_list -> 
+                                match key_list with
+                                | (k, l'') -> 
+                                    if key = k then (k, Cons(value, l'')) else (k, l''))
+                            l'
+                        else Cons((key, Cons(value, Nil)), l'))
+    Nil l
 end
 
 module ListTests(L : List2) = struct
@@ -51,6 +70,7 @@ module ListTests(L : List2) = struct
     || 
     l = Cons(("b", Cons(3, Nil)),  Cons(("a", Cons(2, Cons(1, Nil))), Nil))
   );
+
 
   let m = map (fun x -> x+1) (Cons(1, Cons(2, Cons(3, Cons(4, Cons(5, Nil)))))) in
   assert (m = Cons(2, Cons(3, Cons(4, Cons(5, Cons(6, Nil))))));
