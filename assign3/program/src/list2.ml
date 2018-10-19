@@ -17,7 +17,9 @@ module MyList : List2 = struct
   type 'a list = Cons of 'a * 'a list | Nil
 
   let rec foldr f base l =
-    raise Unimplemented
+    match l with
+    | Cons(x, Nil) -> f base x
+    | Cons(x, y) -> foldr f base y
 
   let to_string f l =
     raise Unimplemented
