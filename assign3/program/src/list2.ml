@@ -36,7 +36,24 @@ module MyList : List2 = struct
     | Nil -> None
 
   let combine_keys l =
-    raise Unimplemented
+    foldr 
+        (fun pair l' -> 
+            match pair with
+            | (key, value) -> 
+                if (foldr 
+                    (fun pair' b -> 
+                        match pair' with
+                        | (k, _) -> 
+                            if (k = key) then (true || b) else false) 
+                    false l')
+                        then map 
+                            (fun key_list -> 
+                                match key_list with
+                                | (k, l'') -> 
+                                    if key = k then (k, Cons(value, l'')) else (k, l''))
+                            l'
+                        else Cons((key, Cons(value, Nil)), l'))
+    Nil l
 end
 
 module ListTests(L : List2) = struct

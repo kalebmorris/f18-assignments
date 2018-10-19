@@ -17,22 +17,44 @@ module MyStream : Stream2 = struct
   type 'a stream = Stream of (unit -> 'a * 'a stream)
 
   let head (Stream f) =
-    raise Unimplemented
+    match (f ()) with
+    | (value, _) -> value
 
   let tail (Stream f) =
-    raise Unimplemented
+    match (f ()) with
+    | (_, stream) -> stream
 
   let rec take s n =
-    raise Unimplemented
+    if n = 0 
+      then (Nil, s)
+    else 
+      match (take (tail s) (n - 1)) with
+      | (l, s') -> (Cons(head s, l), s')
 
   let rec zip (Stream a) (Stream b) =
-    raise Unimplemented
+    Stream (fun () -> ((head (Stream a), head (Stream b)), (zip (tail (Stream a)) (tail (Stream b)))))
+
+  (* let enumerate s =
+    let rec indices (base : int) : int stream =
+      Stream (fun () -> (base, indices(base + 1)))
+    in
+    zip (indices 0) s
+  *)
 
   let enumerate s =
-    raise Unimplemented
+    let rec enumerate_rec n (Stream s') =
+      Stream (fun () -> ((n, head (Stream s')), enumerate_rec (n + 1) (tail (Stream s'))))
+    in
+    enumerate_rec 0 s
+
 
   let rec windows s n =
-    raise Unimplemented
+    let rec window s n =
+      if n = 0 then Nil
+      else Cons(head s, window (tail s) (n - 1))
+    in
+    Stream (fun () -> ((window s n), (windows (tail s) n)))
+
 end
 
 module StreamTests(S : Stream2) = struct
@@ -63,7 +85,7 @@ module StreamTests(S : Stream2) = struct
   ;;
   
   let rec upfrom (n : int) : int stream =
-    raise Unimplemented
+    Stream (fun () -> (n, upfrom (n + 1)))
   ;;
 
   let s = upfrom 5 in
@@ -81,7 +103,10 @@ module StreamTests(S : Stream2) = struct
   ;;
 
   let fib () : int stream =
-    raise Unimplemented
+    let rec fib_rec (n : int) (m : int) : int stream =
+      Stream (fun () -> (n, fib_rec (m) (n + m)))
+    in
+    fib_rec 0 1
   ;;
 
   let s = fib () in
