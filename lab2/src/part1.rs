@@ -9,31 +9,45 @@ fn password_checker(s: String) {
 
     // If the buffer is "Password1" then print "You guessed it!" and return,
     // otherwise print the number of guesses so far.
-    unimplemented!()
+    if &buffer[0..buffer.len()-1] == &s {
+      println!("You guessed it!");
+      return;
+    } else {
+      guesses += 1;
+      println!("Guesses: {}", guesses);
+    }
   }
 }
 
 fn add_n(v: Vec<i32>, n: i32) -> Vec<i32> {
-  unimplemented!()
+  let mut u: Vec<i32> = Vec::new();
+  for m in v.iter() {
+    u.push(m + n);
+  }
+  u
 }
 
 fn add_n_inplace(v: &mut Vec<i32>, n: i32) {
-  unimplemented!()
+  for m in v.iter_mut() {
+    *m += n;
+  }
 }
 
 fn reverse_clone<T: Clone>(v: &mut Vec<T>) {
     let n = v.len();
     for i in 0..n/2 {
-        let x: T = v[i].clone();
-        v[i] = v[n-i-1].clone();
-        v[n-i-1] = x;
+      let x: T = v[i].clone();
+      v[i] = v[n-i-1].clone();
+      v[n-i-1] = x;
     }
 }
 
 fn reverse<T>(v: &mut Vec<T>) {
   let n = v.len();
   for i in 0..n/2 {
-    unimplemented!()
+    unsafe {
+      ptr::swap(&mut v[i], &mut v[n-i-1]);
+    }
   }
 }
 
