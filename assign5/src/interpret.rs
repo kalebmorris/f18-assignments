@@ -67,15 +67,14 @@ fn step(module: &mut WModule, config: WConfig) -> WConfig {
     
     Binop(binop) => {
       let x2 = stack.pop().unwrap();
-      println!("{}", x2);
       let x1 = stack.pop().unwrap();
-      println!("{}", x1);
       match binop {
-        WBinop::Add => { stack.push(x1 + x2); None }
-        WBinop::Sub => { stack.push(x1 - x2); None }
-        WBinop::Mul => { stack.push(x1 * x2); None }
-        WBinop::DivS => { if x2 == 0 { stack.push(0); None } else { stack.push(x1 / x2); None }}
+        WBinop::Add => { stack.push(x1 + x2); }
+        WBinop::Sub => { stack.push(x1 - x2); }
+        WBinop::Mul => { stack.push(x1 * x2); }
+        WBinop::DivS => { if x2 == 0 { stack.push(0); } else { stack.push(x1 / x2); }}
       }
+      None
     }
     
     Relop(relop) => {
@@ -123,22 +122,34 @@ fn step(module: &mut WModule, config: WConfig) -> WConfig {
     }
     
     Label{continuation, stack: mut new_stack, instrs: new_instrs} => {
-      if new_instrs.len() > 0 {
-        match new_instrs[0].clone() {
+      let mut c = WConfig {
+        locals: locals.clone(),
+        stack: new_stack,
+        instrs: new_instrs
+      };
+      while c.instrs.len() > 0 {
+        if let Trapping(_err) = &c.instrs[0] {
+          break;
+        } else if let Returning(_n) = &c.instrs[0] {
+          break;
+        } else if let Br(_n) = &c.instrs[0] {
+          break;
+        }
+        c = step(module, c);
+      };
+      locals = c.locals;
+      if c.instrs.len() > 0 {
+        match c.instrs[0].clone() {
           Trapping(s) => Some(Trapping(s)),
           Returning(n) => Some(Returning(n)),
           Br(n) => {
             if n > 0 {
               Some(Br(n - 1))
             } else {
-              Some((*continuation).unwrap())
+              *continuation
             }
           },
-          _ => {
-            let WConfig {locals: _, mut stack, mut instrs} = 
-              step(module, WConfig {locals: locals.clone(), stack: new_stack, instrs: new_instrs});
-            Some(Label{continuation: continuation, stack, instrs})
-          }
+          _ => None
         }
       } else {
         None
@@ -146,36 +157,39 @@ fn step(module: &mut WModule, config: WConfig) -> WConfig {
     }
     
     Call(i) => {
-      let f = &module.funcs[i as usize];
-      let j = f.params;
-      let k = f.locals;
-      let mut new_locals: Vec<i32> = Vec::new();
-      for _i in 0..j {
-        new_locals.push(stack.pop().unwrap());
-      }
-      let mut new_locals: Vec<i32> = new_locals.iter().rev().cloned().collect();
-      for _i in 0..k {
-        new_locals.push(0);
-      }
-      let mut new_stack: WStack = Vec::new();
-      let mut new_instrs: Vec<WInstr> = f.body.clone();
-
+      let WFunc {params, locals, body} = module.funcs[i as usize].clone();
       let c = WConfig {
-        locals: new_locals,
-        stack: new_stack,
-        instrs: new_instrs
+        locals: {
+          let len = (params + locals) as usize;
+          let mut l = vec![0; len];
+          for i in 0..params {
+            l[(params-i-1) as usize] = stack.pop().unwrap();
+          }
+          l
+        },
+        stack: Vec::new(),
+        instrs: body
       };
       Some(Frame(c))
     }
     
     Frame(mut new_config) => {
+      while new_config.instrs.len() > 0 {
+        if let Trapping(_err) = &new_config.instrs[0] {
+          break;
+        } else if let Returning(_n) = &new_config.instrs[0] {
+          break;
+        }
+        new_config = step(module, new_config);
+      };
       if new_config.instrs.len() > 0 {
         match new_config.instrs[0].clone() {
           Trapping(s) => Some(Trapping(s)),
           Returning(n) => { stack.push(n); None },
-          _ => Some(Frame(step(module, new_config)))
+          _ => None
         }
       } else {
+        stack = new_config.stack;
         None
       }
     }
