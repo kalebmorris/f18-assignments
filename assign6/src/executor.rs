@@ -63,11 +63,24 @@ impl Executor for SingleThreadExecutor {
   where
     F: Future<Item = ()> + 'static,
   {
-    unimplemented!()
+    match f.poll() {
+      Poll::Ready(()) => (),
+      Poll::NotReady => self.futures.push(Box::new(f))
+    }
   }
 
   fn wait(&mut self) {
-    unimplemented!()
+    let mut i = 0;
+    while self.futures.len() > 0 {
+      i = (i + 1) % self.futures.len();
+      match self.futures[i].poll() {
+        Poll::NotReady => {
+          self.futures.remove(i);
+          i -= 1;
+        },
+        _ => ()
+      }
+    }
   }
 }
 
@@ -78,7 +91,23 @@ pub struct MultiThreadExecutor {
 
 impl MultiThreadExecutor {
   pub fn new(num_threads: i32) -> MultiThreadExecutor {
-    unimplemented!()
+    let (sender, receiver): (mpsc::Sender<Option<Box<Future<Item = ()>>>>, 
+                             mpsc::Receiver<Option<Box<Future<Item = ()>>>>)
+                          = mpsc::channel();
+    let safe_rec = Arc::new(Mutex::new(receiver));
+    let threads = (0..num_threads).map(|_| {
+      let safe_rec_copy = safe_rec.clone();
+      thread::spawn(move || {
+        let mut executor = SingleThreadExecutor::new();
+        loop {
+          match safe_rec_copy.lock().unwrap().recv().unwrap() {
+            Some(f) => { executor.spawn(f); },
+            None => { executor.wait(); break; }
+          }
+        }
+      })
+    }).collect::<Vec<_>>();
+    MultiThreadExecutor {sender, threads}
   }
 }
 
@@ -87,10 +116,19 @@ impl Executor for MultiThreadExecutor {
   where
     F: Future<Item = ()> + 'static,
   {
-    unimplemented!()
+    self.sender.send(Some(Box::new(f))).unwrap();
   }
 
   fn wait(&mut self) {
-    unimplemented!()
+    let len = self.threads.len();
+    for _ in 0..len {
+      self.sender.send(None).unwrap();
+    }
+    take_mut::take(&mut self.threads, |th| {
+      for thread in th {
+        thread.join().unwrap();
+      }
+      vec![]
+    });
   }
 }

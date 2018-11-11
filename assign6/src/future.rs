@@ -123,7 +123,46 @@ where
   type Item = (F::Item, G::Item);
 
   fn poll(&mut self) -> Poll<Self::Item> {
-    unimplemented!()
+    let mut f_: Option<F::Item> = None;
+    let mut g_: Option<G::Item> = None;
+    take_mut::take(self, |j| {
+      if let Join::BothRunning(mut f, mut g) = j {
+        match (f.poll(), g.poll()) {
+          (Poll::Ready(fi), Poll::Ready(gi)) => {
+            f_ = Some(fi);
+            g_ = Some(gi);
+            Join::Done
+          },
+          (Poll::Ready(fi), Poll::NotReady) => Join::FirstDone(fi, g),
+          (Poll::NotReady, Poll::Ready(gi)) => Join::SecondDone(f, gi),
+          (Poll::NotReady, Poll::NotReady) => Join::BothRunning(f, g)
+        }
+      } else if let Join::FirstDone(fi, mut g) = j {
+        match g.poll() {
+          Poll::Ready(gi) => {
+            f_ = Some(fi);
+            g_ = Some(gi);
+            Join::Done
+          },
+          Poll::NotReady => Join::FirstDone(fi, g)
+        }
+      } else if let Join::SecondDone(mut f, gi) = j {
+        match f.poll() {
+          Poll::Ready(fi) => {
+            f_ = Some(fi);
+            g_ = Some(gi);
+            Join::Done
+          },
+          Poll::NotReady => Join::SecondDone(f, gi)
+        }
+      } else {
+        Join::Done
+      }
+    });
+    match self {
+      Join::Done => Poll::Ready((f_.unwrap(), g_.unwrap())),
+      _ => Poll::NotReady
+    }
   }
 }
 
@@ -156,6 +195,28 @@ where
   type Item = Fut2::Item;
 
   fn poll(&mut self) -> Poll<Self::Item> {
-    unimplemented!()
+    let mut item: Option<Self::Item> = None;
+    take_mut::take(self, |a| {
+      if let AndThen::First(mut fut1, fun) = a {
+        match fut1.poll() {
+          Poll::Ready(item1) => AndThen::Second(fun(item1)),
+          Poll::NotReady => AndThen::First(fut1, fun)
+        }
+      } else if let AndThen::Second(mut fut2) = a {
+        match fut2.poll() {
+          Poll::Ready(item2) => {
+            item = Some(item2);
+            AndThen::Done
+          },
+          Poll::NotReady => AndThen::Second(fut2)
+        }
+      } else {
+        AndThen::Done
+      }
+    });
+    match self {
+      AndThen::Done => Poll::Ready(item.unwrap()),
+      _ => Poll::NotReady
+    }
   }
 }
