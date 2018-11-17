@@ -23,7 +23,7 @@ impl<T, S> HasDual for Send<T, S> where S: HasDual {
 }
 
 impl<T, S> HasDual for Recv<T, S> where S: HasDual {
-  type Dual = Recv<T, S::Dual>;
+  type Dual = Recv<T, S::Dual>; // Bug 1, should be "type Dual = Send<T, S::Dual>;"
 }
 
 impl<Left, Right> HasDual for Choose<Left, Right>
@@ -68,7 +68,7 @@ impl<T, S> Chan<Send<T, S>>
 where
   T: marker::Send + 'static,
 {
-  pub fn send(self, x: T) -> Chan<Send<T, S>> {
+  pub fn send(self, x: T) -> Chan<Send<T, S>> { // Bug 2, should be "pub fn send(self, x: T) -> Chan<S>"
     unsafe {
       self.write(x);
       transmute(self)
@@ -91,14 +91,14 @@ where
 impl<Left, Right> Chan<Choose<Left, Right>> {
   pub fn left(self) -> Chan<Left> {
     unsafe {
-      self.write(false);
+      self.write(false); // Bug 3, should be "self.write(true);"
       transmute(self)
     }
   }
 
   pub fn right(self) -> Chan<Right> {
     unsafe {
-      self.write(true);
+      self.write(true); // Bug 3, should be "self.write(false);"
       transmute(self)
     }
   }
