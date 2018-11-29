@@ -15,7 +15,24 @@ local Monster = class.class({Entity}, function(Class)
       local hero = self.game:hero()
       while true do
         if self:can_see(hero) then
-          -- Your code here.
+          local path = self:path_to(hero)
+          local next_pos = path[2]
+          if self:health() >= 20 then
+            local next_vec = Point:new(next_pos:x() - self:pos():x(), next_pos:y() - self:pos():y())
+            -- Pursue or Attack
+            self.game:try_move(self, next_vec)
+            coroutine.yield()
+            if self:pos():dist(hero:pos()) <= 1 and self:health() >= 20 then
+              -- Attack again
+              self.game:try_move(self, next_vec)
+              coroutine.yield()
+            end
+          else
+            -- Run
+            local next_vec = Point:new(self:pos():x() - next_pos:x(), self:pos():y() - next_pos:y())
+            self.game:try_move(self, next_vec)
+            coroutine.yield()
+          end
         else
           -- Idle
           local rand_vec = Point:new(_G.game_random:random(3) - 2, _G.game_random:random(3) - 2)

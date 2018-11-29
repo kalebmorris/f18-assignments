@@ -19,7 +19,10 @@ fn cstr<T: Into<String>>(s: T) -> *const c_char {
 }
 
 unsafe extern "C" fn stringmatch(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let string = CStr::from_ptr(luaL_checkstring(L, 1)).to_str().unwrap();
+  let pattern = CStr::from_ptr(luaL_checkstring(L, 2)).to_str().unwrap();
+  lua_pushnumber(L, string.matches(pattern).count() as f64);
+  return 1;
 }
 
 #[no_mangle]

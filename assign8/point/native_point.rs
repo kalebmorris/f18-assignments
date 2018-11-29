@@ -27,39 +27,75 @@ struct Point {
 }
 
 unsafe extern "C" fn point_new(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = lua_newuserdata(L, mem::size_of::<Point>()) as *mut Point;
+  let x = luaL_checknumber(L, -3);
+  let y = luaL_checknumber(L, -2);
+  (*p).x = x as lua_Number;
+  (*p).y = y as lua_Number;
+  luaL_getmetatable(L, POINT_NATIVE);
+  lua_setmetatable(L, -2);
+  return 1;
 }
 
 unsafe extern "C" fn point_x(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  lua_pushnumber(L, (*p).x);
+  return 1;
 }
 
 unsafe extern "C" fn point_y(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  lua_pushnumber(L, (*p).y);
+  return 1;
 }
 
 unsafe extern "C" fn point_setx(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let new_x = luaL_checknumber(L, 2);
+  (*p).x = new_x;
+  return 0;
 }
 
 unsafe extern "C" fn point_sety(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let new_y = luaL_checknumber(L, 2);
+  (*p).y = new_y;
+  return 0;
 }
 
 unsafe extern "C" fn point_add(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let a = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let b = luaL_checkudata(L, 2, POINT_NATIVE) as *mut Point;
+
+  lua_pushnumber(L, (*a).x + (*b).x);
+  lua_pushnumber(L, (*a).y + (*b).y);
+  return point_new(L);
 }
 
 unsafe extern "C" fn point_sub(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let a = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let b = luaL_checkudata(L, 2, POINT_NATIVE) as *mut Point;
+
+  lua_pushnumber(L, (*a).x - (*b).x);
+  lua_pushnumber(L, (*a).y - (*b).y);
+  return point_new(L);
 }
 
 unsafe extern "C" fn point_dist(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let a = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let b = luaL_checkudata(L, 2, POINT_NATIVE) as *mut Point;
+  let x_diff = (*a).x - (*b).x;
+  let y_diff = (*a).y - (*b).y;
+  let squared = f64::powf(x_diff, 2.0) + f64::powf(y_diff, 2.0);
+  lua_pushnumber(L, f64::powf(squared, 0.5));
+  return 1;
 }
 
 unsafe extern "C" fn point_tostring(L: *mut lua_State) -> c_int {
-  unimplemented!()
+  let p = luaL_checkudata(L, 1, POINT_NATIVE) as *mut Point;
+  let string = format!("{{{}, {}}}", (*p).x, (*p).y);
+  lua_pushstring(L, cstr(string));
+  return 1;
 }
 
 unsafe extern "C" fn point_eq(L: *mut lua_State) -> c_int {

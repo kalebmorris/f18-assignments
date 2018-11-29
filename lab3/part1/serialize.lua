@@ -21,11 +21,39 @@ local function parse_parens(s)
 end
 
 local function serialize(t)
-  -- TODO
+  local typ = type(t)
+  local result
+  if typ == "string" then
+    result = t
+  elseif typ == "number" then
+    result = tostring(t)
+  elseif typ == "table" then
+    result = ""
+    for k, v in pairs(t) do
+      result = result .. string.format("((%s)(%s))", serialize(k), serialize(v))
+    end
+  end
+  return string.format("(%s)(%s)", typ, result)
 end
 
 local function deserialize(s)
-  -- TODO
+  local parts = parse_parens(s)
+  local typ = parts[1]
+  local val = parts[2]
+  if typ == "string" then
+    return val
+  elseif typ == "number" then
+    return tonumber(val)
+  elseif typ == "table" then
+    local t = {}
+    for _, pair in pairs(parse_parens(val)) do
+      local parts = parse_parens(pair)
+      local k = deserialize(parts[1])
+      local v = deserialize(parts[2])
+      t[k] = v
+    end
+    return t
+  end
 end
 
 local values = {

@@ -17,11 +17,11 @@ local Point = class.class({class.Object}, function(Class)
     function Class:set_y(y) self._y = y end
 
     function Class:__add(p)
-        return Class:new(self:x() + p:x(), self:y() + p:y())
+      return Class:new(self:x() + p:x(), self:y() + p:y())
     end
 
     function Class:__sub(p)
-        return Class:new(self:x() - p:x(), self:y() - p:y())
+      return Class:new(self:x() - p:x(), self:y() - p:y())
     end
 
     function Class:__eq(p)
